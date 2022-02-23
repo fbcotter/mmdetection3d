@@ -32,6 +32,7 @@ def main():
     # test a single image
     result, data = inference_mono_3d_detector(model, args.image, args.ann)
     # show the results
+    import ipdb; ipdb.set_trace()
     show_result_meshlab(
         data,
         result,

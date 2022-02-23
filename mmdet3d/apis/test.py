@@ -4,8 +4,7 @@ import torch
 from mmcv.image import tensor2imgs
 from os import path as osp
 
-from mmdet3d.models import (Base3DDetector, Base3DSegmentor,
-                            SingleStageMono3DDetector)
+from mmdet3d.models import (Base3DDetector, Base3DSegmentor, SingleStageMono3DDetector)
 
 
 def single_gpu_test(model,
@@ -48,7 +47,7 @@ def single_gpu_test(model,
                     data,
                     result,
                     out_dir=out_dir,
-                    show=show,
+                    show=False,
                     score_thr=show_score_thr)
             # Visualize the results of MMDetection model
             # 'show_result' is MMdetection visualization API

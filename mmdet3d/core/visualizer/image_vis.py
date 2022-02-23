@@ -118,6 +118,13 @@ def draw_lidar_bbox3d_on_img(bboxes3d,
     pts_2d[:, 1] /= pts_2d[:, 2]
     imgfov_pts_2d = pts_2d[..., :2].reshape(num_bbox, 8, 2)
 
+    # Ensure at least 1 corner is in the fov of the image
+    corners_in_x = (imgfov_pts_2d[:, :, 0] > 0) & (imgfov_pts_2d[:, :, 0] < img.shape[1])
+    mask_x = np.any(corners_in_x, axis=-1)
+    corners_in_y = (imgfov_pts_2d[:, :, 1] > 0) & (imgfov_pts_2d[:, :, 0] < img.shape[0])
+    mask_y = np.any(corners_in_y, axis=-1)
+    imgfov_pts_2d = imgfov_pts_2d[mask_x | mask_y]
+
     return plot_rect3d_on_img(img, num_bbox, imgfov_pts_2d, color, thickness)
 
 
